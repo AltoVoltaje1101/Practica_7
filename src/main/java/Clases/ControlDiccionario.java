@@ -91,6 +91,7 @@ public class ControlDiccionario {
         File f = new File(rutaArchivo);
         String[] palabrasDiccionario = new String[diccionario.size()];
         Scanner s;
+        boolean diccRecreado = false;
         ArrayList<String> palabrasNuevas = new ArrayList<>();
         String[] provisional;
         int i = 0;
@@ -101,14 +102,15 @@ public class ControlDiccionario {
             s = new Scanner(f);
             while (s.hasNextLine()) {
                 //Texto sin modificaciones
-                String nueva;
                 String cadenaNormal = transformarConAcentos(s.nextLine());//limpieza de caracteres no alfa numericos
                 String cadena = cadenaNormal.replaceAll("\\p{P}", "");//limpieza de caracteres
                 provisional = cadena.split(" ");//division de la cadena limpia en un vector de strinfs
-                /*for(i =0;i<provisional.length;i++){
-                    provisional[i]= transformarConAcentos(provisional[i]);
-                }*/
                 
+                System.out.println("/*////////////////Impresion arreglo");
+                for(i= 0; i<provisional.length;i++) {
+                    provisional[i] = provisional[i].replaceAll("\\s","");
+                    System.out.println("["+i+"]"+provisional[i]);
+                }
                 for (int j = 0; j < provisional.length; j++) {
                     if (!provisional[j].isEmpty() && !palabrasIgnoradas.contains(provisional[j].toLowerCase()) && !palabrasNuevas.contains(provisional[j].toLowerCase())) {
                         if (eleccionMetodo(palabrasDiccionario,provisional[j])) {
@@ -135,6 +137,8 @@ public class ControlDiccionario {
                                     }
                                     break;
                                 case 4:
+                                    diccRecreado = true;
+                                    System.out.println("Ingreso temirnar");
                                     recrearDiccionario();
                                     System.out.println("Si se recrea");
                                     return false;
@@ -143,7 +147,7 @@ public class ControlDiccionario {
                     }
                 }
                 i++;
-            }
+            } if(!diccRecreado) recrearDiccionario();
             s.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -179,23 +183,9 @@ public class ControlDiccionario {
         diccionario.add(palabraNueva);
     }
 
-    public void escribirEnTxt(ArrayList<String> palabrasNuevas) {
-        try {
-            BufferedWriter bufferWritter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rutaDiccionario,true), "UTF-8"));
-            BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\Archivos\\diccionario.txt"));
-            for (int i = 0; i < palabrasNuevas.size(); i++) {
-                bufferWritter.write("\n" + palabrasNuevas.remove(0));
-            }
-            bufferWritter.close();
-            br.close();
-            lecturaDiccionario();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public void recrearDiccionario() {
         try {
+            System.out.println("Ruta directorio:"+rutaDiccionario);
             BufferedWriter bufferWritter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rutaDiccionario), "UTF-8"));
             BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\Archivos\\diccionario.txt"));
             ordenar();
