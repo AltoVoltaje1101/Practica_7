@@ -41,7 +41,7 @@ public class ControlDiccionario {
         ordenamientos = new Ordenamiento();
         palabrasIgnoradas = new HashSet<>();
         diccionario = new ArrayList<>();
-        rutaDiccionario = "D:\\Itiel\\5to_Semestre\\Algoritmos y estructuras de datos\\Laboratorio\\Practica7\\src\\main\\java\\Archivos\\diccionario.txt";
+        rutaDiccionario = "src\\main\\java\\Archivos\\diccionario.txt";
         numArchivo = 0;
     }
 
@@ -182,7 +182,7 @@ public class ControlDiccionario {
     public void escribirEnTxt(ArrayList<String> palabrasNuevas) {
         try {
             BufferedWriter bufferWritter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rutaDiccionario,true), "UTF-8"));
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Itiel\\5to_Semestre\\Algoritmos y estructuras de datos\\Laboratorio\\Practica7\\src\\main\\java\\Archivos\\diccionario.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\Archivos\\diccionario.txt"));
             for (int i = 0; i < palabrasNuevas.size(); i++) {
                 bufferWritter.write("\n" + palabrasNuevas.remove(0));
             }
@@ -197,7 +197,7 @@ public class ControlDiccionario {
     public void recrearDiccionario() {
         try {
             BufferedWriter bufferWritter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(rutaDiccionario), "UTF-8"));
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Itiel\\5to_Semestre\\Algoritmos y estructuras de datos\\Laboratorio\\Practica7\\src\\main\\java\\Archivos\\diccionario.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\Archivos\\diccionario.txt"));
             ordenar();
             for (int i = 0; i < diccionario.size(); i++) {
                 bufferWritter.write(diccionario.get(i)+"\n");

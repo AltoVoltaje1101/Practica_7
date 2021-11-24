@@ -138,12 +138,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonMetodoActionPerformed
     private void cambioBotonMetodo(boolean metodo){
        if(metodo){
-        ImageIcon boton = new ImageIcon("D:\\Itiel\\5to_Semestre\\Algoritmos y estructuras de datos\\"
-                + "Laboratorio\\Practica7\\src\\main\\java\\botones\\toogleNormal.png");
+        ImageIcon boton = new ImageIcon("src\\main\\java\\botones\\toogleNormal.png");
          botonMetodo.setIcon(boton);
        }else {
-           ImageIcon boton = new ImageIcon("D:\\Itiel\\5to_Semestre\\Algoritmos y estructuras de datos\\"
-                   + "Laboratorio\\Practica7\\src\\main\\java\\botones\\toogleInvertido.png");
+           ImageIcon boton = new ImageIcon("src\\main\\java\\botones\\toogleInvertido.png");
             botonMetodo.setIcon(boton);
        }
        
