@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 public class InterfazPrincipal extends javax.swing.JFrame {
 
-    ControlDiccionario control;
+    ControlArchivos control;
     String archivoUsuario;//direccion del archivo seleccionado por el usuario
 
     public InterfazPrincipal() {
@@ -139,7 +139,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_seleccionarArchivoActionPerformed
 
     private void analizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarArchivoActionPerformed
-        control = new ControlDiccionario(this);
+        if(archivoUsuario!=null){
+            control = new ControlArchivos(this);
         control.setMetodo(botonMetodo.isSelected());
         System.out.println(nombreArchivo.getText());
         System.out.println("uno dos tres");
@@ -147,10 +148,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         System.out.println(s[s.length-1]);
         System.out.println();
         control.leerArchivos(archivoUsuario,s[s.length-1]);
+        }else{
+            System.out.println("No hay ningun archivo seleccionado");
+        }
     }//GEN-LAST:event_analizarArchivoActionPerformed
 
     private void botonMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMetodoActionPerformed
-    control.setMetodo(botonMetodo.isSelected());
     cambioBotonMetodo(botonMetodo.isSelected());
     }//GEN-LAST:event_botonMetodoActionPerformed
     private void cambioBotonMetodo(boolean metodo){

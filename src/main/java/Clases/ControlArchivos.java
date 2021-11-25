@@ -25,19 +25,19 @@ import org.apache.commons.io.FileUtils;
  *
  * @author felix_5bh1a4y
  */
-public class ControlDiccionario {
+public class ControlArchivos {
 
     ArrayList<String> diccionario;
     VentanaOpciones ventanaEmergente;
     String rutaDiccionario, rutaArchivo, nombreArchivo;
-    Ordenamiento ordenamientos;
+    Busqueda ordenamientos;
     boolean metodo;
     HashSet<String> palabrasIgnoradas;
     int palabrasTotales, palabrasIgnorar, palabrasCorregidas, palabrasAgregadas;
 
-    public ControlDiccionario(JFrame frame) {
+    public ControlArchivos(JFrame frame) {
         ventanaEmergente = new VentanaOpciones(frame, true);
-        ordenamientos = new Ordenamiento();
+        ordenamientos = new Busqueda();
         palabrasIgnoradas = new HashSet<>();
         diccionario = new ArrayList<>();
         rutaDiccionario = "src\\main\\java\\Archivos\\diccionario.txt";

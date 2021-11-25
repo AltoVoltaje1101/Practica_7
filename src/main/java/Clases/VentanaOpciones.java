@@ -43,8 +43,6 @@ public class VentanaOpciones extends javax.swing.JDialog {
         cuadroTexto.setText(texto);
         subrayarPalabra();
         setVisible(true);
-        
-
     }
 
     public void subrayarPalabra() {
@@ -65,50 +63,6 @@ public class VentanaOpciones extends javax.swing.JDialog {
     }
     public void modificarInterfaz(int ignoradas,int agregadas, int reemplazadas,int totales){
         ventanaResultados.mostrarResultados(ignoradas,agregadas,reemplazadas,totales);
-        /*
-        botonIgnorar.setVisible(false);
-        botonAgregarDiccionario.setVisible(false);
-        botonIgnorarTodo.setVisible(false);
-        botonTerminar.setVisible(false);
-        buscarReemplazar.setVisible(false);
-        cuadroTexto.setVisible(false);
-        cuadroTexto= null;
-        setSize(200,200);
-        JPanel panel = new JPanel();
-        add(panel);
-
-        panel.setSize(200,200);
-        panel.setLocation(0, 0);
-        setVisible(true);
-        JLabel palabrasIgnoradas = new JLabel();
-        palabrasIgnoradas.setLocation(100, 50);
-        palabrasIgnoradas.setText("Palabras ignoradas:"+ignoradas);
-        panel.add(palabrasIgnoradas);
-        palabrasIgnoradas.setVisible(true);
-        add(palabrasIgnoradas);
-        
-        JLabel palabrasAgregadas = new JLabel();
-        palabrasAgregadas.setLocation(100, 100);
-        palabrasAgregadas.setText("Palabras Agregadas:"+agregadas);
-                panel.add(palabrasAgregadas);
-                palabrasAgregadas.setVisible(true);
-
-        JLabel palabrasReemplazadas = new JLabel();
-        palabrasReemplazadas.setLocation(100, 150);
-        palabrasReemplazadas.setText("Palabras reemplazadas:"+reemplazadas);
-                        panel.add(palabrasReemplazadas);
-palabrasReemplazadas.setVisible(true);
-        add(palabrasReemplazadas);
-
-
-        JLabel palabrasTotales = new JLabel();
-        palabrasTotales.setLocation(100, 100);
-        palabrasTotales.setText("Palabras Totales:"+totales);
-                        panel.add(palabrasTotales);
-palabrasTotales.setVisible(true);
-
-        */
-        System.out.println("Si se llamo correctamiente");
         
     }
 
@@ -266,11 +220,11 @@ palabrasTotales.setVisible(true);
         return palabraNueva;
     }
     public void cambiarBotones(){
-        ImageIcon boton = new ImageIcon("src\\main\\java\\botones\\analizar1.png");
+        ImageIcon boton = new ImageIcon("src\\main\\java\\botones\\ignorar1.png");
         botonIgnorar.setIcon(boton);
-        boton = new ImageIcon("src\\main\\java\\botones\\analizar0.png");
+        boton = new ImageIcon("src\\main\\java\\botones\\ignorar0.png");
         botonIgnorar.setRolloverIcon(boton);
-        boton = new ImageIcon("src\\main\\java\\botones\\analizar2.png");
+        boton = new ImageIcon("src\\main\\java\\botones\\ignorar2.png");
         botonIgnorar.setPressedIcon(boton);
         botonIgnorar.setCursor(new Cursor(HAND_CURSOR));
         botonIgnorar.setLocation(90, 35);

@@ -12,11 +12,11 @@ import java.util.HashMap;
  *
  * @author felix_5bh1a4y
  */
-public class Ordenamiento {
+public class Busqueda {
 
     HashMap<Integer, String> elementos;
 
-    public Ordenamiento() {
+    public Busqueda() {
         elementos = new HashMap();
     }
 
