@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 import javax.swing.JFrame;
 import java.io.BufferedWriter;
 import java.text.Collator;
@@ -44,6 +43,7 @@ public class ControlDiccionario {
         rutaDiccionario = "src\\main\\java\\Archivos\\diccionario.txt";
     }
 
+       //lectura de diccionario, y deposito de las palabras en un arrayList
     public void lecturaDiccionario() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(rutaDiccionario));
@@ -68,7 +68,7 @@ public class ControlDiccionario {
         this.metodo = metodo;
     }
 
-    public boolean leerArchivos(String ubicacion, String nombreArchivo) {
+    public void leerArchivos(String ubicacion, String nombreArchivo) {
 
         palabrasTotales = palabrasIgnorar = palabrasCorregidas = palabrasAgregadas = 0;
         lecturaDiccionario();//creacion del diccionario
@@ -78,7 +78,6 @@ public class ControlDiccionario {
         //y es sobre esta copia haremos las correcciones necesarias.
         File f = new File(rutaArchivo);
         String[] palabrasDiccionario = new String[diccionario.size()];
-        Scanner s;
         try {
             BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));
             boolean diccRecreado = false;
@@ -88,26 +87,27 @@ public class ControlDiccionario {
             for (i = 0; i < diccionario.size(); i++) {
                 palabrasDiccionario[i] = diccionario.get(i);
             }
-            int contadorLineas = 0;
             try {
-                s = new Scanner(f);
                 String mientras;
                 while ((mientras = br.readLine()) != null) {
-                    contadorLineas++;
-                    System.out.println("Linea:" + contadorLineas);
-                    String cadenaNormal = transformarConAcentos(mientras);//limpieza de caracteres no alfa numericos
-                    String cadena = cadenaNormal.replaceAll("\\p{P}", "");//limpieza de caracteres
-                    provisional = cadena.split(" ");//division de la cadena limpia en un vector de strinfs
+                    String cadenaNormal = transformarConAcentos(mientras);//transformacion de cadena
+                    //para forzar una cadena con acentos en caso de contenerlos y evitar simbolos extra;os
+                    String cadena = cadenaNormal.replaceAll("\\p{P}", "");//limpieza de simbolos de puntuacion
+                    provisional = cadena.split(" ");//division de la cadena limpia en un vector de strings
                     for (i = 0; i < provisional.length; i++) {
                         provisional[i] = provisional[i].replaceAll("\\s", "");//limpieza de tabuladores en caso de ser necesario
                     }
                     palabrasTotales += provisional.length;
-                    if (ventanaEmergente.getEleccion() != -1) {
-                        for (int j = 0; j < provisional.length; j++) {
+                    if (ventanaEmergente.getEleccion() != -1) {//Que la ventana tenga un valor de -1, indica que el usuario hizo click en el boton terminar
+                        //lo que quiere decir que correremos el programa unicamente para contar las palabras, por lo que no es necesario
+                        //buscar en el diccionario las palabras restantes
+                        for (int j = 0; j < provisional.length; j++) {//bucle que recorre el arreglo con el fin de buscar
+                            //cada una de las palabras con el metodo seleccionado por el usuario
                             if (!provisional[j].isEmpty() && !palabrasIgnoradas.contains(provisional[j].toLowerCase()) && !palabrasNuevas.contains(provisional[j].toLowerCase()) && ventanaEmergente.getEleccion() != -1) {
                                 if (eleccionMetodo(palabrasDiccionario, provisional[j]) && ventanaEmergente.getEleccion() != -1) {
                                 } else {
-                                    desplegarMenu(cadenaNormal, provisional[j]);
+                                    ventanaEmergente.enviarTexto(cadenaNormal, provisional[j]);//metodo que despliega el Jdialog
+                                    //correspondiente, en donde se muestra la linea leida, y la palabra no encontrada
                                     switch (ventanaEmergente.getEleccion()) {
                                         case 0://ignorar
                                             palabrasIgnorar++;
@@ -125,20 +125,18 @@ public class ControlDiccionario {
                                             break;
                                         case 3:// reemplazar
                                             if (ventanaEmergente.getSiCambio()) {
-                                                Sustituir(provisional[j], ventanaEmergente.getNuevaPalabra());
+                                                sustituir(provisional[j], ventanaEmergente.getNuevaPalabra());
                                                 cadenaNormal = cadenaNormal.replaceAll(provisional[j], ventanaEmergente.getNuevaPalabra());
-                                                palabrasNuevas.add(ventanaEmergente.getNuevaPalabra().toLowerCase());
-                                                agregarDiccionario(ventanaEmergente.getNuevaPalabra());
+                                                palabrasNuevas.add(ventanaEmergente.getNuevaPalabra().toLowerCase());//a;adimos la palabra
+                                                //a un hashset para no volver a buscarla
+                                                agregarDiccionario(ventanaEmergente.getNuevaPalabra());//la agregamos al diccionario
+                                                //en caso de que no este en este
                                                 palabrasCorregidas++;
-                                                System.out.println("Palabrasagregadas2:" + palabrasAgregadas);
-
-                                                System.out.println("Palabras corregidas:" + palabrasCorregidas);
-
                                             }
                                             break;
                                         case 4:
                                             diccRecreado = true;
-                                            recrearDiccionario();
+                                            recrearDiccionario();//metodo utilziado para sobreescribir el diccionario con las palabras nuevas
                                             ventanaEmergente.setEleccion(-1);
                                             break;
                                     }
@@ -149,7 +147,6 @@ public class ControlDiccionario {
                     i++;
                 }
                 if (!diccRecreado) {
-                    System.out.println("recreado?:" + diccRecreado);
                     recrearDiccionario();
                 }
                 br.close();
@@ -157,35 +154,26 @@ public class ControlDiccionario {
                 e.printStackTrace();
                 diccionario.sort(String::compareToIgnoreCase);
             }
-            System.out.println("ignoradas:" + palabrasIgnorar);
-            System.out.println("agregadas:" + palabrasAgregadas);
-            System.out.println("reemplazadas:" + palabrasCorregidas);
-            System.out.println("Totales:" + palabrasTotales);
             ventanaEmergente.modificarInterfaz(palabrasIgnorar, palabrasAgregadas, palabrasCorregidas, palabrasTotales);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return true;
-    }
-
-    public void desplegarMenu(String cadenaCompleta, String palabra) {
-        ventanaEmergente.enviarTexto(cadenaCompleta, palabra);
-        ventanaEmergente.getEleccion();
     }
 
     public String transformarConAcentos(String palabra) {
         String palabraTransformada = "";
         byte[] bytes = palabra.getBytes();
         try {
-            palabraTransformada = new String(bytes, "UTF-8");
+            palabraTransformada = new String(bytes, "UTF-8");//transformamos la palabra 
+            //recibida a una codificacion que permita mostrar los acentos
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return palabraTransformada;
     }
 
-    public void ordenar(ArrayList array) {
+    public void ordenar(ArrayList array) {//Metodo utilizado para ordenar el arrayList 
+        //del diccionario de manera correcta
         ArrayList sortedTertiaryCollator = new ArrayList(array);
         Collator tertiaryCollator = Collator.getInstance(new Locale("es"));
         tertiaryCollator.setStrength(Collator.TERTIARY);
@@ -226,16 +214,13 @@ public class ControlDiccionario {
     }
 
     private void crearNuevoArchivo(String nombre, String nombreArchivo) {
-        String cadena = "";
         int i = 0;
         String[] nameExt = nombreArchivo.split("\\.");
-        System.out.println(nameExt[0]);
         nombre = nombre.replaceAll(nombreArchivo, "");
         File nuevoArchivo = new File(nombre + nameExt[0] + "_revisado (" + i + ")" + "." + nameExt[1]);
         while (nuevoArchivo.exists()) {
             i++;
-            cadena = nombre + nameExt[0] + "_revisado (" + i + ")" + "." + nameExt[1];
-            nuevoArchivo = new File(cadena);
+            nuevoArchivo = new File( nombre + nameExt[0] + "_revisado (" + i + ")" + "." + nameExt[1]);
         }
 
         File original = new File(rutaArchivo);
@@ -244,28 +229,26 @@ public class ControlDiccionario {
         } catch (IOException ex) {
 
         }
-        System.out.println("Ruta nuevo" + nuevoArchivo.getAbsolutePath());
-        System.out.println("RutaOriginal:" + original.getAbsolutePath());
         rutaArchivo = nuevoArchivo.getAbsolutePath();
-        System.out.println("Variable Ruta Archivo:" + rutaArchivo);
-        System.out.println("Pokimon");
 
     }
 
     private boolean eleccionMetodo(String[] palabrasDiccionario, String provisional) {
         if (metodo) {
+            System.out.println("Se uso binaria");
             if (ordenamientos.binaria(palabrasDiccionario, provisional.toLowerCase()) != -1) {
                 return true;
             } else {
                 return false;
             }
         } else {
+            System.out.println("se uso hash");
             ordenamientos.Hash(palabrasDiccionario);
             return ordenamientos.funcionHash(provisional.toLowerCase());
         }
     }
 
-    public void Sustituir(String palabraVieja, String palabraNueva) {
+    public void sustituir(String palabraVieja, String palabraNueva) {
         File textFile = new File(rutaArchivo);
         try {
             String data = FileUtils.readFileToString(textFile);
