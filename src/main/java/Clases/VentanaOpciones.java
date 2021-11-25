@@ -61,8 +61,8 @@ public class VentanaOpciones extends javax.swing.JDialog {
             System.out.println("No salio bien");
         }
     }
-    public void modificarInterfaz(int ignoradas,int agregadas, int reemplazadas,int totales){
-        ventanaResultados.mostrarResultados(ignoradas,agregadas,reemplazadas,totales);
+    public void modificarInterfaz(int ignoradas,int agregadas, int reemplazadas,int totales,int malas){
+        ventanaResultados.mostrarResultados(ignoradas,agregadas,reemplazadas,totales,malas);
         
     }
 

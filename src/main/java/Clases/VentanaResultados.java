@@ -17,12 +17,13 @@ public class VentanaResultados extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    public void mostrarResultados(int ignoradas,int agregadas, int reemplazadas,int totales){
+    public void mostrarResultados(int ignoradas,int agregadas, int reemplazadas,int totales,int malas){
         
         palabrasIgnoradas.setText("Palabras ignoradas:"+ignoradas);
         palabrasAgregadas.setText("Palabras Agregadas:"+agregadas);
         palabrasCorregidas.setText("Palabras reemplazadas:"+reemplazadas);
         palabrasTotales.setText("Palabras Totales:"+totales);
+        this.malas.setText("Palabras Incorrectas:"+malas);
                 setVisible(true);
 
     }
@@ -40,6 +41,7 @@ public class VentanaResultados extends javax.swing.JDialog {
         palabrasAgregadas = new javax.swing.JLabel();
         palabrasCorregidas = new javax.swing.JLabel();
         palabrasTotales = new javax.swing.JLabel();
+        malas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,6 +57,8 @@ public class VentanaResultados extends javax.swing.JDialog {
         palabrasTotales.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         palabrasTotales.setText("jLabel1");
 
+        malas.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,6 +66,7 @@ public class VentanaResultados extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(malas)
                     .addComponent(palabrasTotales)
                     .addComponent(palabrasCorregidas)
                     .addComponent(palabrasAgregadas)
@@ -77,9 +82,11 @@ public class VentanaResultados extends javax.swing.JDialog {
                 .addComponent(palabrasAgregadas)
                 .addGap(18, 18, 18)
                 .addComponent(palabrasCorregidas)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(malas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(palabrasTotales)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -128,6 +135,7 @@ public class VentanaResultados extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel malas;
     private javax.swing.JLabel palabrasAgregadas;
     private javax.swing.JLabel palabrasCorregidas;
     private javax.swing.JLabel palabrasIgnoradas;

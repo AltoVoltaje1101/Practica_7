@@ -130,11 +130,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if (filename == null) {
             nombreArchivo.setText("Archivo seleccionado: Vacio");//en caso de que no seleccionase nada,
             //escribir Archivo vacio de nuevo
+            archivoUsuario = null;
         } else {
             nombreArchivo.setText("Archivo seleccionado: " + fd.getFile());//En caso contrario, escribir
-            //el nombre del archivo en la ventana
+            archivoUsuario = fd.getDirectory() + fd.getFile();//el nombre del archivo en la ventana
         }
-        archivoUsuario = fd.getDirectory() + fd.getFile();//Construccion de la cadena completa del 
+        //Construccion de la cadena completa del 
         //archivo elegido
     }//GEN-LAST:event_seleccionarArchivoActionPerformed
 

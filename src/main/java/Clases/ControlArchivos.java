@@ -87,6 +87,7 @@ public class ControlArchivos {
             for (i = 0; i < diccionario.size(); i++) {
                 palabrasDiccionario[i] = diccionario.get(i);
             }
+            int palabrasMalas = 0;
             try {
                 String mientras;
                 while ((mientras = br.readLine()) != null) {
@@ -106,6 +107,7 @@ public class ControlArchivos {
                             if (!provisional[j].isEmpty() && !palabrasIgnoradas.contains(provisional[j].toLowerCase()) && !palabrasNuevas.contains(provisional[j].toLowerCase()) && ventanaEmergente.getEleccion() != -1) {
                                 if (eleccionMetodo(palabrasDiccionario, provisional[j]) && ventanaEmergente.getEleccion() != -1) {
                                 } else {
+                                    palabrasMalas++;
                                     ventanaEmergente.enviarTexto(cadenaNormal, provisional[j]);//metodo que despliega el Jdialog
                                     //correspondiente, en donde se muestra la linea leida, y la palabra no encontrada
                                     switch (ventanaEmergente.getEleccion()) {
@@ -120,6 +122,7 @@ public class ControlArchivos {
                                             break;
                                         case 2://a;adir al diccionario
                                             palabrasNuevas.add(provisional[j].toLowerCase());
+                                            palabrasIgnoradas.add(provisional[j]);
                                             agregarDiccionario(provisional[j]);
                                             System.out.println("Palabrasagregadas:" + palabrasAgregadas);
                                             break;
@@ -128,10 +131,11 @@ public class ControlArchivos {
                                                 sustituir(provisional[j], ventanaEmergente.getNuevaPalabra());
                                                 cadenaNormal = cadenaNormal.replaceAll(provisional[j], ventanaEmergente.getNuevaPalabra());
                                                 palabrasNuevas.add(ventanaEmergente.getNuevaPalabra().toLowerCase());//a;adimos la palabra
-                                                //a un hashset para no volver a buscarla
+                                                palabrasIgnoradas.add(provisional[j]);//a un hashset para no volver a buscarla
                                                 agregarDiccionario(ventanaEmergente.getNuevaPalabra());//la agregamos al diccionario
                                                 //en caso de que no este en este
                                                 palabrasCorregidas++;
+                                                System.out.println("Palabras Agregadas:"+palabrasAgregadas);
                                             }
                                             break;
                                         case 4:
@@ -154,7 +158,7 @@ public class ControlArchivos {
                 e.printStackTrace();
                 diccionario.sort(String::compareToIgnoreCase);
             }
-            ventanaEmergente.modificarInterfaz(palabrasIgnorar, palabrasAgregadas, palabrasCorregidas, palabrasTotales);
+            ventanaEmergente.modificarInterfaz(palabrasIgnorar, palabrasAgregadas, palabrasCorregidas, palabrasTotales,palabrasMalas);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -184,6 +188,7 @@ public class ControlArchivos {
     public void agregarDiccionario(String palabraNueva) {
         if (!diccionario.contains(palabraNueva)) {
             diccionario.add(palabraNueva);
+            System.out.println("Palbra agregada:"+palabraNueva);
             palabrasAgregadas++;
         } else {
             System.out.println("Palabra ya existente en el diccionario");
@@ -232,7 +237,7 @@ public class ControlArchivos {
         rutaArchivo = nuevoArchivo.getAbsolutePath();
 
     }
-
+    //metodo utilizado para seleccionar el metodo de busqueda segun la eleccion del usuario
     private boolean eleccionMetodo(String[] palabrasDiccionario, String provisional) {
         if (metodo) {
             System.out.println("Se uso binaria");
@@ -252,7 +257,7 @@ public class ControlArchivos {
         File textFile = new File(rutaArchivo);
         try {
             String data = FileUtils.readFileToString(textFile);
-            data = data.replace(palabraVieja, palabraNueva);
+            data = data.replace(palabraVieja, transformarConAcentos(palabraNueva));
             FileUtils.writeStringToFile(textFile, data);
         } catch (IOException e) {
             e.printStackTrace();
