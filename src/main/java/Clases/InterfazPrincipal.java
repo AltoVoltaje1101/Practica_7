@@ -15,7 +15,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     public InterfazPrincipal() {
         initComponents();
         nombreArchivo.setText("Archivo seleccionado: Vacio");
-
         cambioBotonMetodo(botonMetodo.isSelected());
         setBotonesNuevos();
 
@@ -117,23 +116,26 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarArchivoActionPerformed
-        FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
+        FileDialog fd = new FileDialog(this, "Selecciona un archivo", FileDialog.LOAD);
         fd.setDirectory("C:\\");
-        fd.setFile("*.txt");
+        fd.setFile("*.txt;*.csv;*.c*.cs");//Archivos permitidos por el programa
         fd.setVisible(true);
         fd.setFilenameFilter(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.endsWith(".txt") || name.endsWith(".jpeg");
+                return name.endsWith(".txt") || name.endsWith(".csv")|| name.endsWith(".cs")|| name.endsWith(".c");
             }
         });
-        String filename = fd.getFile();
+        String filename = fd.getFile();//obtenemos el nombre del archivo
         if (filename == null) {
-            nombreArchivo.setText("Archivo seleccionado: Vacio");
+            nombreArchivo.setText("Archivo seleccionado: Vacio");//en caso de que no seleccionase nada,
+            //escribir Archivo vacio de nuevo
         } else {
-            nombreArchivo.setText("Archivo seleccionado: " + fd.getFile());
+            nombreArchivo.setText("Archivo seleccionado: " + fd.getFile());//En caso contrario, escribir
+            //el nombre del archivo en la ventana
         }
-        archivoUsuario = fd.getDirectory() + fd.getFile();
+        archivoUsuario = fd.getDirectory() + fd.getFile();//Construccion de la cadena completa del 
+        //archivo elegido
     }//GEN-LAST:event_seleccionarArchivoActionPerformed
 
     private void analizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarArchivoActionPerformed

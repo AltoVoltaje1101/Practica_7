@@ -9,6 +9,8 @@ import java.awt.Cursor;
 import static java.awt.Frame.HAND_CURSOR;
 import java.io.UnsupportedEncodingException;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
@@ -19,46 +21,36 @@ import javax.swing.text.Highlighter;
  * @author felix_5bh1a4y
  */
 public class VentanaOpciones extends javax.swing.JDialog {
-
-    String texto;
+    VentanaResultados ventanaResultados;
     int eleccion;
     String palabraNoEncontrada;
     String palabraNueva;
     VentanaNuevaPalabra newWord;
     boolean siCambio;
 
-    /**
-     * Creates new form VentanaOpciones
-     */
     public VentanaOpciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         eleccion = 0;
         cuadroTexto.setEditable(false);
-        botonIgnorarTodo.setText("<html>" + "Ignorar todo y no volver a marcar" + "</html>");
-        botonAgregarDiccionario.setText("<html>" + "Agregar al diccionario" + "</html>");
         newWord = new VentanaNuevaPalabra(parent, true);
+        ventanaResultados = new VentanaResultados(parent,true);
         cambiarBotones();
     }
 
     public void enviarTexto(String texto, String palabraNoEncontrada) {
-        this.texto = texto;
         this.palabraNoEncontrada = palabraNoEncontrada;
         cuadroTexto.setText(texto);
         subrayarPalabra();
         setVisible(true);
+        
 
-    }
-
-    public String getTexto() {
-        return texto;
     }
 
     public void subrayarPalabra() {
         try {
             Highlighter hilite = cuadroTexto.getHighlighter();
             Document doc = cuadroTexto.getDocument();
-            System.out.println("Impresion del texto del cuadro:" + cuadroTexto.getText());
             String text = doc.getText(0, doc.getLength());
             int pos = 0;
             // Search for pattern
@@ -71,20 +63,60 @@ public class VentanaOpciones extends javax.swing.JDialog {
             System.out.println("No salio bien");
         }
     }
+    public void modificarInterfaz(int ignoradas,int agregadas, int reemplazadas,int totales){
+        ventanaResultados.mostrarResultados(ignoradas,agregadas,reemplazadas,totales);
+        /*
+        botonIgnorar.setVisible(false);
+        botonAgregarDiccionario.setVisible(false);
+        botonIgnorarTodo.setVisible(false);
+        botonTerminar.setVisible(false);
+        buscarReemplazar.setVisible(false);
+        cuadroTexto.setVisible(false);
+        cuadroTexto= null;
+        setSize(200,200);
+        JPanel panel = new JPanel();
+        add(panel);
+
+        panel.setSize(200,200);
+        panel.setLocation(0, 0);
+        setVisible(true);
+        JLabel palabrasIgnoradas = new JLabel();
+        palabrasIgnoradas.setLocation(100, 50);
+        palabrasIgnoradas.setText("Palabras ignoradas:"+ignoradas);
+        panel.add(palabrasIgnoradas);
+        palabrasIgnoradas.setVisible(true);
+        add(palabrasIgnoradas);
+        
+        JLabel palabrasAgregadas = new JLabel();
+        palabrasAgregadas.setLocation(100, 100);
+        palabrasAgregadas.setText("Palabras Agregadas:"+agregadas);
+                panel.add(palabrasAgregadas);
+                palabrasAgregadas.setVisible(true);
+
+        JLabel palabrasReemplazadas = new JLabel();
+        palabrasReemplazadas.setLocation(100, 150);
+        palabrasReemplazadas.setText("Palabras reemplazadas:"+reemplazadas);
+                        panel.add(palabrasReemplazadas);
+palabrasReemplazadas.setVisible(true);
+        add(palabrasReemplazadas);
+
+
+        JLabel palabrasTotales = new JLabel();
+        palabrasTotales.setLocation(100, 100);
+        palabrasTotales.setText("Palabras Totales:"+totales);
+                        panel.add(palabrasTotales);
+palabrasTotales.setVisible(true);
+
+        */
+        System.out.println("Si se llamo correctamiente");
+        
+    }
 
     public int getEleccion() {
         return eleccion;
     }
-
-    public String transformarConAcentos(String palabra) {
-        String palabraTransformada = "";
-        byte[] englishBytes = palabra.getBytes();
-        try {
-            palabraTransformada = new String(englishBytes, "UTF8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return palabraTransformada;
+    public void setEleccion(int a){
+        eleccion = a;
     }
 
     /**
