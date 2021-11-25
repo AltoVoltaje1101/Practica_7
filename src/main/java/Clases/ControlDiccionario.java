@@ -86,7 +86,7 @@ public class ControlDiccionario {
         this.nombreArchivo = nombreArchivo;
         numArchivo++;
         rutaArchivo = ubicacion;
-        crearNuevoArchivo(rutaArchivo);
+        crearNuevoArchivo(rutaArchivo,nombreArchivo);
         ///aqui va el metodo para crear el nuevo archivo
         File f = new File(rutaArchivo);
         String[] palabrasDiccionario = new String[diccionario.size()];
@@ -126,14 +126,16 @@ public class ControlDiccionario {
                                     break;
                                 case 2://a;adir al diccionario
                                     palabrasNuevas.add(provisional[j].toLowerCase());
-                                    agregarDiccionario(provisional[j].toLowerCase());
+                                    agregarDiccionario(provisional[j]);
                                     break;
                                 case 3:// reemplazar
                                     if (ventanaEmergente.getSiCambio()) {
                                         Sustituir(provisional[j], ventanaEmergente.getNuevaPalabra());
+                                        System.out.println("Si jala");
                                         cadenaNormal=cadenaNormal.replaceAll(provisional[j], ventanaEmergente.getNuevaPalabra());
                                         palabrasNuevas.add(ventanaEmergente.getNuevaPalabra().toLowerCase());
-                                        agregarDiccionario(ventanaEmergente.getNuevaPalabra().toLowerCase());
+                                        agregarDiccionario(ventanaEmergente.getNuevaPalabra());
+                                        System.out.println("nueva palabra:"+ventanaEmergente.getNuevaPalabra().toLowerCase());
                                     }
                                     break;
                                 case 4:
@@ -180,7 +182,8 @@ public class ControlDiccionario {
     }
 
     public void agregarDiccionario(String palabraNueva) {
-        diccionario.add(palabraNueva);
+        if(!diccionario.contains(palabraNueva))diccionario.add(palabraNueva);
+        else System.out.println("Palabra ya existente en el diccionario");
     }
 
     public void recrearDiccionario() {
@@ -190,6 +193,7 @@ public class ControlDiccionario {
             BufferedReader br = new BufferedReader(new FileReader("src\\main\\java\\Archivos\\diccionario.txt"));
             ordenar();
             for (int i = 0; i < diccionario.size(); i++) {
+                //System.out.println("["+i+"]"+diccionario.get(i));
                 bufferWritter.write(diccionario.get(i)+"\n");
             }
             diccionario.sort(String::compareToIgnoreCase);
@@ -209,13 +213,19 @@ public class ControlDiccionario {
     diccionario=sortedTertiaryCollator;
   }
     
-   private void crearNuevoArchivo(String nombre){
+   private void crearNuevoArchivo(String nombre,String nombreArchivo){
        String cadena = "";
        int i = 0;
-       File nuevoArchivo= new File(nombre+"_revisado ("+i+")");
+       System.out.println("Nombre archivo");
+       String[] nameExt = nombreArchivo.split("\\.");
+       System.out.println(nameExt[0]);
+       nombre = nombre.replaceAll(nombreArchivo, "");
+       System.out.println("Nombre:"+nombre);
+       System.out.println("Nombre archivo:"+nombreArchivo);
+       File nuevoArchivo= new File(nombre+nameExt[0]+"_revisado ("+i+")"+"."+nameExt[1]);
        while(nuevoArchivo.exists()){
            i++;
-           cadena = nombre+"_revisado ("+i+")";
+           cadena =nombre+nameExt[0]+"_revisado ("+i+")"+"."+nameExt[1];
            nuevoArchivo = new File(cadena);
        }
        

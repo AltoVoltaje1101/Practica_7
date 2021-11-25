@@ -24,22 +24,20 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" alignment="0" pref="619" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="botonIgnorar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="botonIgnorarTodo" min="-2" pref="124" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="botonAgregarDiccionario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="buscarReemplazar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
-                      <Component id="botonTerminar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Component id="botonIgnorar" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="botonIgnorarTodo" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="botonAgregarDiccionario" min="-2" pref="106" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="buscarReemplazar" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="botonTerminar" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -51,17 +49,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="86" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="botonAgregarDiccionario" alignment="3" min="-2" pref="61" max="-2" attributes="0"/>
-                      <Component id="botonTerminar" alignment="3" min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="buscarReemplazar" alignment="3" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="botonIgnorarTodo" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="botonAgregarDiccionario" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="botonIgnorar" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="buscarReemplazar" alignment="1" min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="botonIgnorar" min="-2" pref="61" max="-2" attributes="0"/>
-                  <Component id="botonIgnorarTodo" min="-2" pref="61" max="-2" attributes="0"/>
+                  <Component id="botonTerminar" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,20 +67,29 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="botonIgnorar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ignorar"/>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonIgnorarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonIgnorarTodo">
+      <Properties>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonIgnorarTodoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonAgregarDiccionario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="A;adir"/>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAgregarDiccionarioActionPerformed"/>
@@ -90,7 +97,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="botonTerminar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Terminar"/>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonTerminarActionPerformed"/>
@@ -109,7 +118,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="buscarReemplazar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar y reemplazar"/>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarReemplazarActionPerformed"/>

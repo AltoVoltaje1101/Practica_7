@@ -4,6 +4,10 @@
  */
 package Clases;
 
+import java.awt.Cursor;
+import static java.awt.Frame.HAND_CURSOR;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author felix_5bh1a4y
@@ -20,6 +24,7 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
         initComponents();
         cajaEstatica.setEditable(false);
                 System.out.println("Palabra vieja:"+palabraVieja);
+                cambiarBotones();
 
     }
 
@@ -46,14 +51,18 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
 
         jLabel2.setText("Reemplazar");
 
-        ingresar.setText("Ingresar");
+        ingresar.setBorderPainted(false);
+        ingresar.setContentAreaFilled(false);
+        ingresar.setFocusPainted(false);
         ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresarActionPerformed(evt);
             }
         });
 
-        cancelar.setText("Cancelar");
+        cancelar.setContentAreaFilled(false);
+        cancelar.setDefaultCapable(false);
+        cancelar.setFocusPainted(false);
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarActionPerformed(evt);
@@ -65,32 +74,32 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(ingresar)
-                        .addGap(36, 36, 36)
-                        .addComponent(cancelar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cajaEstatica)
-                        .addComponent(cajaReemplazo, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cajaEstatica)
+                            .addComponent(cajaReemplazo, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(aviso, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cajaEstatica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,11 +107,11 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cajaReemplazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ingresar)
-                    .addComponent(cancelar))
-                .addGap(20, 20, 20))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,7 +123,7 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
             setVisible(false);
             siCambio = true;
             System.out.println("si jala:"+siCambio);
-
+            cajaReemplazo.setText("");
         }
         else{
             aviso.setText("Por favor escriba el reemplazo correspondiente.");
@@ -125,6 +134,7 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
         siCambio = false;
         nuevaPalabra = "";
         System.out.println("si jala:"+siCambio);
+        cajaReemplazo.setText("");
 
         setVisible(false);
     }//GEN-LAST:event_cancelarActionPerformed
@@ -139,6 +149,23 @@ public class VentanaNuevaPalabra extends javax.swing.JDialog {
     }
     public void setTextoEstatico(String palabra){
         cajaEstatica.setText(palabra);
+    }
+    public void cambiarBotones(){
+        ImageIcon boton = new ImageIcon("src\\main\\java\\botones\\ingresar1.png");
+        ingresar.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\ingresar0.png");
+        ingresar.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\ingresar2.png");
+        ingresar.setPressedIcon(boton);
+        ingresar.setCursor(new Cursor(HAND_CURSOR));
+        
+        boton = new ImageIcon("src\\main\\java\\botones\\cancelar1.png");
+        cancelar.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\cancelar0.png");
+        cancelar.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\cancelar2.png");
+        cancelar.setPressedIcon(boton);
+        cancelar.setCursor(new Cursor(HAND_CURSOR));
     }
     /**
      * @param args the command line arguments

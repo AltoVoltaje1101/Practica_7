@@ -1,6 +1,8 @@
 package Clases;
 
+import java.awt.Cursor;
 import java.awt.FileDialog;
+import static java.awt.Frame.HAND_CURSOR;
 import java.io.File;
 import java.io.FilenameFilter;
 import javax.swing.ImageIcon;
@@ -13,9 +15,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     public InterfazPrincipal() {
         initComponents();
         nombreArchivo.setText("Archivo seleccionado: Vacio");
-        control = new ControlDiccionario(this);
-        control.setMetodo(botonMetodo.isSelected());
+
         cambioBotonMetodo(botonMetodo.isSelected());
+        setBotonesNuevos();
 
     }
 
@@ -37,7 +39,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        seleccionarArchivo.setText("Seleccionar Archivo");
+        seleccionarArchivo.setBorderPainted(false);
+        seleccionarArchivo.setContentAreaFilled(false);
+        seleccionarArchivo.setFocusPainted(false);
         seleccionarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seleccionarArchivoActionPerformed(evt);
@@ -46,7 +50,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         nombreArchivo.setText("Archivo seleccionado:");
 
-        analizarArchivo.setText("Analizar");
+        analizarArchivo.setBorderPainted(false);
+        analizarArchivo.setContentAreaFilled(false);
+        analizarArchivo.setFocusable(false);
         analizarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 analizarArchivoActionPerformed(evt);
@@ -73,17 +79,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(analizarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                    .addComponent(analizarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nombreArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(17, 17, 17)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addComponent(botonMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -93,12 +99,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(analizarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(botonMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                    .addComponent(analizarArchivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botonMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(17, 17, 17)))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,7 +137,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_seleccionarArchivoActionPerformed
 
     private void analizarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarArchivoActionPerformed
-        control.leerArchivos(archivoUsuario,nombreArchivo.getText());
+        control = new ControlDiccionario(this);
+        control.setMetodo(botonMetodo.isSelected());
+        System.out.println(nombreArchivo.getText());
+        System.out.println("uno dos tres");
+        String[] s = nombreArchivo.getText().split(" ");
+        System.out.println(s[s.length-1]);
+        System.out.println();
+        control.leerArchivos(archivoUsuario,s[s.length-1]);
     }//GEN-LAST:event_analizarArchivoActionPerformed
 
     private void botonMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMetodoActionPerformed
@@ -147,7 +161,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
        }
     }
     public void setBotonesNuevos(){
+        ImageIcon boton = new ImageIcon("src\\main\\java\\Botones\\analizar1.png");
+        analizarArchivo.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\Botones\\analizar0.png");
+        analizarArchivo.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\Botones\\analizar2.png");
+        analizarArchivo.setPressedIcon(boton);
+        analizarArchivo.setCursor(new Cursor(HAND_CURSOR));
         
+        boton = new ImageIcon("src\\main\\java\\Botones\\seleccionarArchivo1.png");
+        seleccionarArchivo.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\Botones\\seleccionarArchivo0.png");
+        seleccionarArchivo.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\Botones\\seleccionarArchivo2.png");
+        seleccionarArchivo.setPressedIcon(boton);
+        seleccionarArchivo.setCursor(new Cursor(HAND_CURSOR));
     }
 
     /**

@@ -5,7 +5,10 @@
 package Clases;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import static java.awt.Frame.HAND_CURSOR;
 import java.io.UnsupportedEncodingException;
+import javax.swing.ImageIcon;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
@@ -35,6 +38,7 @@ public class VentanaOpciones extends javax.swing.JDialog {
         botonIgnorarTodo.setText("<html>" + "Ignorar todo y no volver a marcar" + "</html>");
         botonAgregarDiccionario.setText("<html>" + "Agregar al diccionario" + "</html>");
         newWord = new VentanaNuevaPalabra(parent, true);
+        cambiarBotones();
     }
 
     public void enviarTexto(String texto, String palabraNoEncontrada) {
@@ -102,27 +106,36 @@ public class VentanaOpciones extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        botonIgnorar.setText("Ignorar");
+        botonIgnorar.setBorderPainted(false);
+        botonIgnorar.setContentAreaFilled(false);
+        botonIgnorar.setFocusPainted(false);
         botonIgnorar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonIgnorarActionPerformed(evt);
             }
         });
 
+        botonIgnorarTodo.setBorderPainted(false);
+        botonIgnorarTodo.setContentAreaFilled(false);
+        botonIgnorarTodo.setFocusPainted(false);
         botonIgnorarTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonIgnorarTodoActionPerformed(evt);
             }
         });
 
-        botonAgregarDiccionario.setText("A;adir");
+        botonAgregarDiccionario.setBorderPainted(false);
+        botonAgregarDiccionario.setContentAreaFilled(false);
+        botonAgregarDiccionario.setFocusPainted(false);
         botonAgregarDiccionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarDiccionarioActionPerformed(evt);
             }
         });
 
-        botonTerminar.setText("Terminar");
+        botonTerminar.setBorderPainted(false);
+        botonTerminar.setContentAreaFilled(false);
+        botonTerminar.setFocusPainted(false);
         botonTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonTerminarActionPerformed(evt);
@@ -131,7 +144,9 @@ public class VentanaOpciones extends javax.swing.JDialog {
 
         jScrollPane2.setViewportView(cuadroTexto);
 
-        buscarReemplazar.setText("Buscar y reemplazar");
+        buscarReemplazar.setBorderPainted(false);
+        buscarReemplazar.setContentAreaFilled(false);
+        buscarReemplazar.setFocusPainted(false);
         buscarReemplazar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarReemplazarActionPerformed(evt);
@@ -143,21 +158,20 @@ public class VentanaOpciones extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(botonIgnorar)
-                        .addGap(31, 31, 31)
-                        .addComponent(botonIgnorarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(botonAgregarDiccionario)
-                        .addGap(29, 29, 29)
-                        .addComponent(buscarReemplazar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addComponent(botonTerminar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
+                        .addComponent(botonIgnorar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(botonIgnorarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonAgregarDiccionario, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(buscarReemplazar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(botonTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,15 +179,15 @@ public class VentanaOpciones extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botonAgregarDiccionario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buscarReemplazar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(botonIgnorar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonIgnorarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(botonIgnorarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonAgregarDiccionario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonIgnorar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscarReemplazar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,6 +232,50 @@ public class VentanaOpciones extends javax.swing.JDialog {
     }
     public String getNuevaPalabra(){
         return palabraNueva;
+    }
+    public void cambiarBotones(){
+        ImageIcon boton = new ImageIcon("src\\main\\java\\botones\\analizar1.png");
+        botonIgnorar.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\analizar0.png");
+        botonIgnorar.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\analizar2.png");
+        botonIgnorar.setPressedIcon(boton);
+        botonIgnorar.setCursor(new Cursor(HAND_CURSOR));
+        botonIgnorar.setLocation(90, 35);
+        
+        boton = new ImageIcon("src\\main\\java\\botones\\ignorarTodo1.png");
+        botonIgnorarTodo.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\ignorarTodo0.png");
+        botonIgnorarTodo.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\ignorarTodo2.png");
+        botonIgnorarTodo.setPressedIcon(boton);
+        botonIgnorarTodo.setCursor(new Cursor(HAND_CURSOR));
+        botonIgnorar.setLocation(90, WIDTH);
+        
+        boton = new ImageIcon("src\\main\\java\\botones\\agregarDiccionario1.png");
+        botonAgregarDiccionario.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\agregarDiccionario0.png");
+        botonAgregarDiccionario.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\agregarDiccionario2.png");
+        botonAgregarDiccionario.setPressedIcon(boton);
+        botonAgregarDiccionario.setCursor(new Cursor(HAND_CURSOR));
+        
+        boton = new ImageIcon("src\\main\\java\\botones\\sustituir1.png");
+        buscarReemplazar.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\sustituir0.png");
+        buscarReemplazar.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\sustituir2.png");
+        buscarReemplazar.setPressedIcon(boton);
+        buscarReemplazar.setCursor(new Cursor(HAND_CURSOR));
+        
+        boton = new ImageIcon("src\\main\\java\\botones\\terminar1.png");
+        botonTerminar.setIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\terminar0.png");
+        botonTerminar.setRolloverIcon(boton);
+        boton = new ImageIcon("src\\main\\java\\botones\\terminar2.png");
+        botonTerminar.setPressedIcon(boton);
+        botonTerminar.setCursor(new Cursor(HAND_CURSOR));
+        
     }
     /**
      * @param args the command line arguments
